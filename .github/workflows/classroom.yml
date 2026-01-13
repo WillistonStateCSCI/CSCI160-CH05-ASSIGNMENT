@@ -1,0 +1,296 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Q05_42 Test 1
+      id: q05_42-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_42 Test 1
+        setup-command: javac Q05_42/BattingAverage.java
+        command: java -cp Q05_42 BattingAverage
+        input: |-
+          30
+          35
+        expected-output: |-
+          The batting average is 86%
+          Batter is eligible for All Stars Game
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_42 Test 2
+      id: q05_42-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_42 Test 2
+        setup-command: javac Q05_42/BattingAverage.java
+        command: java -cp Q05_42 BattingAverage
+        input: |-
+          6
+          30
+        expected-output: |-
+          The batting average is 20%
+          Batter is not eligible for All Stars Game
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_44 Test
+      id: q05_44-test
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_44 Test
+        setup-command: javac Q05_44/AreaCalculator.java
+        command: java -cp Q05_44 AreaCalculator
+        input: ''
+        expected-output: |-
+          The area of a square of size 0.666666667 is 0.4444444448888889
+          The area of a rectangle with sides of
+          0.1111111111111111 and 4 is 0.4444444444444444
+          The areas are considered equal.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_45 Test 1
+      id: q05_45-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_45 Test 1
+        setup-command: javac Q05_45/SentenceType.java
+        command: java -cp Q05_45 SentenceType
+        input: This is your Test 1.
+        expected-output: The sentence is declarative.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_45 Test 2
+      id: q05_45-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_45 Test 2
+        setup-command: javac Q05_45/SentenceType.java
+        command: java -cp Q05_45 SentenceType
+        input: How do you feel about Test 2?
+        expected-output: The sentence is interrogative.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_45 Test 3
+      id: q05_45-test-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_45 Test 3
+        setup-command: javac Q05_45/SentenceType.java
+        command: java -cp Q05_45 SentenceType
+        input: Test 3 is sure to be your favorite!
+        expected-output: The sentence is exclamatory.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_45 Test 4
+      id: q05_45-test-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_45 Test 4
+        setup-command: javac Q05_45/SentenceType.java
+        command: java -cp Q05_45 SentenceType
+        input: Something is missing from Test 4
+        expected-output: Sentence type is unknown.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_47 Test 1
+      id: q05_47-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_47 Test 1
+        setup-command: javac Q05_47/VerifyPassword.java
+        command: java -cp Q05_47 VerifyPassword
+        input: |-
+          PaSsWoRd
+          PaSsWoRd
+        expected-output: You are now registered as a new user.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_47 Test 2
+      id: q05_47-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_47 Test 2
+        setup-command: javac Q05_47/VerifyPassword.java
+        command: java -cp Q05_47 VerifyPassword
+        input: |-
+          PaSsWoRd
+          pAsSwOrD
+        expected-output: Sorry, there is a typo in your password.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_48 Test 1
+      id: q05_48-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_48 Test 1
+        setup-command: javac Q05_48/UserID.java
+        command: java -cp Q05_48 UserID
+        input: barbara
+        expected-output: Welcome, barbara
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_48 Test 2
+      id: q05_48-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_48 Test 2
+        setup-command: javac Q05_48/UserID.java
+        command: java -cp Q05_48 UserID
+        input: barbaragordon
+        expected-output: Sorry, user ID is invalid.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_50 Test 1
+      id: q05_50-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_50 Test 1
+        setup-command: javac Q05_50/ProbableSeason.java
+        command: java -cp Q05_50 ProbableSeason
+        input: '100'
+        expected-output: It is probably summer.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_50 Test 2
+      id: q05_50-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_50 Test 2
+        setup-command: javac Q05_50/ProbableSeason.java
+        command: javac -cp Q05_50 ProbableSeason
+        input: '80'
+        expected-output: It is probably spring.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_50 Test 3
+      id: q05_50-test-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_50 Test 3
+        setup-command: javac Q05_50/ProbableSeason.java
+        command: java -cp Q05_50 ProbableSeason
+        input: '60'
+        expected-output: It is probably fall.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_50 Test 4
+      id: q05_50-test-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_50 Test 4
+        setup-command: javac Q05_50/ProbableSeason.java
+        command: java -cp Q05_50 ProbableSeason
+        input: '32'
+        expected-output: It is probably winter.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_50 Test 5
+      id: q05_50-test-5
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_50 Test 5
+        setup-command: javac Q05_50/ProbableSeason.java
+        command: java -cp Q05_50 ProbableSeason
+        input: "-10"
+        expected-output: The temperature is out of range.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_50 Test 6
+      id: q05_50-test-6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_50 Test 6
+        setup-command: javac Q05_50/ProbableSeason.java
+        command: java -cp Q05_50 ProbableSeason
+        input: '115'
+        expected-output: The temperature is out of range.
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_51 Test 1
+      id: q05_51-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_51 Test 1
+        setup-command: javac Q05_51/YearProcessor.java
+        command: java -cp Q05_51 Year Processor
+        input: '12'
+        expected-output: The year is 2012
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_51 Test 2
+      id: q05_51-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_51 Test 2
+        setup-command: javac Q05_51/YearProcessor.java
+        command: java Q05_51 YearProcessor
+        input: '2012'
+        expected-output: The year is 2012
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Q05_51 Test 3
+      id: q05_51-test-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_51 Test 3
+        setup-command: javac Q05_51/YearProcessor.java
+        command: java -cp Q05_51 YearProcessor
+        input: '300'
+        expected-output: The year is not valid
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        Q05_42-TEST-1_RESULTS: "${{steps.q05_42-test-1.outputs.result}}"
+        Q05_42-TEST-2_RESULTS: "${{steps.q05_42-test-2.outputs.result}}"
+        Q05_44-TEST_RESULTS: "${{steps.q05_44-test.outputs.result}}"
+        Q05_45-TEST-1_RESULTS: "${{steps.q05_45-test-1.outputs.result}}"
+        Q05_45-TEST-2_RESULTS: "${{steps.q05_45-test-2.outputs.result}}"
+        Q05_45-TEST-3_RESULTS: "${{steps.q05_45-test-3.outputs.result}}"
+        Q05_45-TEST-4_RESULTS: "${{steps.q05_45-test-4.outputs.result}}"
+        Q05_47-TEST-1_RESULTS: "${{steps.q05_47-test-1.outputs.result}}"
+        Q05_47-TEST-2_RESULTS: "${{steps.q05_47-test-2.outputs.result}}"
+        Q05_48-TEST-1_RESULTS: "${{steps.q05_48-test-1.outputs.result}}"
+        Q05_48-TEST-2_RESULTS: "${{steps.q05_48-test-2.outputs.result}}"
+        Q05_50-TEST-1_RESULTS: "${{steps.q05_50-test-1.outputs.result}}"
+        Q05_50-TEST-2_RESULTS: "${{steps.q05_50-test-2.outputs.result}}"
+        Q05_50-TEST-3_RESULTS: "${{steps.q05_50-test-3.outputs.result}}"
+        Q05_50-TEST-4_RESULTS: "${{steps.q05_50-test-4.outputs.result}}"
+        Q05_50-TEST-5_RESULTS: "${{steps.q05_50-test-5.outputs.result}}"
+        Q05_50-TEST-6_RESULTS: "${{steps.q05_50-test-6.outputs.result}}"
+        Q05_51-TEST-1_RESULTS: "${{steps.q05_51-test-1.outputs.result}}"
+        Q05_51-TEST-2_RESULTS: "${{steps.q05_51-test-2.outputs.result}}"
+        Q05_51-TEST-3_RESULTS: "${{steps.q05_51-test-3.outputs.result}}"
+      with:
+        runners: q05_42-test-1,q05_42-test-2,q05_44-test,q05_45-test-1,q05_45-test-2,q05_45-test-3,q05_45-test-4,q05_47-test-1,q05_47-test-2,q05_48-test-1,q05_48-test-2,q05_50-test-1,q05_50-test-2,q05_50-test-3,q05_50-test-4,q05_50-test-5,q05_50-test-6,q05_51-test-1,q05_51-test-2,q05_51-test-3
