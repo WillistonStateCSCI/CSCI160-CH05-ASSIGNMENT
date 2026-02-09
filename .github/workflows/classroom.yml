@@ -239,7 +239,7 @@ jobs:
       with:
         test-name: Q05_51 Test 1
         setup-command: javac Q05_51/YearProcessor.java
-        command: java -cp Q05_51 Year Processor
+        command: java -cp Q05_51 YearProcessor
         input: '12'
         expected-output: The year is 2012
         comparison-method: contains
@@ -251,7 +251,7 @@ jobs:
       with:
         test-name: Q05_51 Test 2
         setup-command: javac Q05_51/YearProcessor.java
-        command: java Q05_51 YearProcessor
+        command: java -cp Q05_51 YearProcessor
         input: '2012'
         expected-output: The year is 2012
         comparison-method: contains
